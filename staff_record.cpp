@@ -1,61 +1,80 @@
 #include <iostream>
 using namespace std;
+
 const int size = 5;
+
 struct Graph
 {
-    // int vertices;
-    int count = 0;
-    string val = "";
-    Graph *root = nullptr;
-    Graph *left = nullptr;
-    Graph *right = nullptr;
+    string val;
+    Graph *left;
+    Graph *right;
+
+    Graph(const string &value) : val(value), left(nullptr), right(nullptr) {}
 };
-
-// struct LL{
-
-// };
 
 void add_staff(string arr[])
 {
     for (int i = 0; i < size; i++)
     {
-        cout << "Please, enter the staff name: [" << i << "]: ";
+        cout << "Please, enter the staff name [" << i << "]: ";
         cin >> arr[i];
-    }
-}
-
-void replace_staff(string arr[], string found)
-{
-
-    for (int i = 0; i < size; i++)
-    {
-        if (arr[i] == found)
-        {
-            arr[i] = "---";
-        }
     }
 }
 
 void print_list(string arr[])
 {
-    for (int i; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         cout << arr[i] << "<-->";
     }
+    cout << endl;
+}
+
+void insertIntoBST(Graph *&root, const string &value)
+{
+    if (root == nullptr)
+    {
+        root = new Graph(value);
+    }
+    else
+    {
+        if (value < root->val)
+        {
+            insertIntoBST(root->left, value);
+        }
+        else
+        {
+            insertIntoBST(root->right, value);
+        }
+    }
+}
+
+void printBST(Graph *&root)
+{
+    Graph *curr = root;
+    printBST(curr->left);
+    cout << curr->val << "--";
+    printBST(curr->right);
 }
 
 int main()
 {
+    string arr1[size];
 
-    string *arr1 = new string[size];
-    string *arr2 = new string[size];
-    cout << "Enter the staff collection1:" << endl;
+    cout << "Enter the staff collection:" << endl;
     add_staff(arr1);
-    // cout << "Enter the staff collection2:" << endl;
-    // add_staff(arr2);
-    cout << "Now, time to replace the staff: " << endl;
-    // replace_staff(arr1, "ligma");
-    print_list();
+
+    cout << "Staff names: ";
+    print_list(arr1);
+
+    Graph *g = nullptr;
+
+    for (int i = 0; i < size; i++)
+    {
+        insertIntoBST(g, arr1[i]);
+    }
+
+    // Now, you have a BST constructed from the names in arr1
 
     return 0;
 }
