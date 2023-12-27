@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int size = 5;
+const int arraySize = 5;
 
 struct Graph
 {
@@ -14,7 +14,7 @@ struct Graph
 
 void add_staff(string arr[])
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < arraySize; i++)
     {
         cout << "Please, enter the staff name [" << i << "]: ";
         cin >> arr[i];
@@ -23,7 +23,7 @@ void add_staff(string arr[])
 
 void print_list(string arr[])
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < arraySize; i++)
     {
         cout << arr[i] << "<-->";
     }
@@ -63,7 +63,7 @@ void printBST(Graph *root)
 
 int main()
 {
-    string arr1[size];
+    string arr1[arraySize];
 
     cout << "Enter the staff collection:" << endl;
     add_staff(arr1);
@@ -73,7 +73,7 @@ int main()
 
     Graph *g = nullptr;
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < arraySize; i++)
     {
         insertIntoBST(g, arr1[i]);
     }
