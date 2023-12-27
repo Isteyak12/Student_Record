@@ -3,62 +3,48 @@ using namespace std;
 
 const int size = 5;
 
-struct Graph
-{
+struct Graph {
     string val;
-    Graph *left;
-    Graph *right;
+    Graph* left;
+    Graph* right;
 
-    Graph(const string &value) : val(value), left(nullptr), right(nullptr) {}
+    Graph(const string& value) : val(value), left(nullptr), right(nullptr) {}
 };
 
-void add_staff(string arr[])
-{
-    for (int i = 0; i < size; i++)
-    {
+void add_staff(string arr[]) {
+    for (int i = 0; i < size; i++) {
         cout << "Please, enter the staff name [" << i << "]: ";
         cin >> arr[i];
     }
 }
 
-void print_list(string arr[])
-{
-    for (int i = 0; i < size; i++)
-    {
+void print_list(string arr[]) {
+    for (int i = 0; i < size; i++) {
         cout << arr[i] << "<-->";
     }
     cout << endl;
 }
 
-void insertIntoBST(Graph *&root, const string &value)
-{
-    if (root == nullptr)
-    {
+void insertIntoBST(Graph*& root, const string& value) {
+    if (root == nullptr) {
         root = new Graph(value);
-    }
-    else
-    {
-        if (value < root->val)
-        {
+    } else {
+        if (value < root->val) {
             insertIntoBST(root->left, value);
-        }
-        else
-        {
+        } else {
             insertIntoBST(root->right, value);
         }
     }
 }
 
-void printBST(Graph *&root)
-{
-    Graph *curr = root;
-    printBST(curr->left);
-    cout << curr->val << "--";
-    printBST(curr->right);
+void printBST(Graph*&root){
+    Graph*&curr=root;
+    printBST(curr.left);
+    cout<<curr.val<<"--";
+    pri
 }
 
-int main()
-{
+int main() {
     string arr1[size];
 
     cout << "Enter the staff collection:" << endl;
@@ -67,10 +53,9 @@ int main()
     cout << "Staff names: ";
     print_list(arr1);
 
-    Graph *g = nullptr;
+    Graph* g = nullptr;
 
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         insertIntoBST(g, arr1[i]);
     }
 

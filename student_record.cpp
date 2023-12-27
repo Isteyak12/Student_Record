@@ -1,18 +1,84 @@
 #include <iostream>
 using namespace std;
 
-struct LL{
-    int roll;
-    string name; 
-    LL* next=nullptr;
+const int size = 5;
+
+struct Graph
+{
+    string val;
+    Graph *left=nullptr;
+    Graph *right=nullptr;
+
+    // Graph(const string &value) : val(value), left(nullptr), right(nullptr) {}
 };
 
-void student_id(LL*&x, int data){
-
+void add_staff(string arr[])
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << "Please, enter the staff name [" << i << "]: ";
+        cin >> arr[i];
+    }
 }
 
+void print_list(string arr[])
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << "<-->";
+    }
+    cout << endl;
+}
 
-int main(){
-    LL*x=new LL();
-    student_id(x);
+void insertIntoBST(Graph *&root, const string &value)
+{
+    if (root == nullptr)
+    {
+        root = new Graph();
+        root->val=value;
+    }
+    else
+    {
+        if (value < root->val)
+        {
+            insertIntoBST(root->left, value);
+        }
+        else
+        {
+            insertIntoBST(root->right, value);
+        }
+    }
+}
+
+void printBST(Graph *root)
+{
+    Graph *curr = root;
+    if (curr != nullptr)
+    {
+        printBST(curr->left);
+        cout << curr->val << "--";
+        printBST(curr->right);
+    }
+}
+
+int main()
+{
+    string arr1[size];
+
+    cout << "Enter the staff collection:" << endl;
+    add_staff(arr1);
+
+    cout << "Staff names: ";
+    print_list(arr1);
+
+    Graph *g = nullptr;
+
+    for (int i = 0; i < size; i++)
+    {
+        insertIntoBST(g, arr1[i]);
+    }
+    printBST(g);
+    // Now, you have a BST constructed from the names in arr1
+
+    return 0;
 }
