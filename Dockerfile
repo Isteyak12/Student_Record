@@ -1,14 +1,15 @@
-# Use an image with a C++ compiler and standard libraries
 FROM gcc:latest
-
-# Set the working directory in the container
 WORKDIR /app
+COPY . /app
 
-# Copy the C++ source code file into the container at /app
-COPY main.cpp /app
+RUN g++ -o file1 main.cpp
+RUN g++ -o file2 linklist.cpp
 
-# Compile the C++ code
-RUN g++ -o main main.cpp
+RUN echo '#!/bin/bash\n./file1\n./file2' > run_files.sh
+RUN chmod +x run_files.sh
 
-# Set the command to run the compiled C++ program
-CMD ["./main"]
+CMD ["./run_files.sh"]
+
+# only last cmd is run during docker run
+
+# 
